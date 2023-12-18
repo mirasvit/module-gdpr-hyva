@@ -1,0 +1,31 @@
+<?php
+/** @var SettingsModal $block */
+
+use Mirasvit\GdprCookie\Block\SettingsModal;
+
+?>
+
+<div style="display: none;" data-bind="mageInit: {
+        'Magento_Ui/js/modal/modal':{
+            'type': 'popup',
+            'title': '<?= $block->getPopupTitle(); ?>',
+            'trigger': '[data-trigger-settings=trigger]',
+            'responsive': true,
+            'innerScroll': true,
+            'modalClass': 'mst-gdpr__cookie-settings--cookie-modal-settings',
+            'buttons': [{
+                text: jQuery.mage.__('Apply'),
+                class: 'action primary mst-gdpr__cookie-settings--success-btn'
+            }]
+        }}">
+    <div class="content">
+        <div class="modal-text">
+            <?= $block->getPopupDescription(); ?>
+        </div>
+        <div class="mst-gdpr__cookie-settings--group-content">
+            <?php foreach ($block->getCookieGroups() as $group): ?>
+                <?= $block->getCookieGroupHtml($group); ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
