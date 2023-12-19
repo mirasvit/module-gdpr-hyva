@@ -13,10 +13,10 @@
     ],
     "autoload": {
         "files": [
-            "src/MirasvitCredit/registration.php"
+            "src/MirasvitGdpr/registration.php"
         ],
         "psr-4": {
-            "Hyva\\MirasvitCredit\\": "src/MirasvitCredit"
+            "Hyva\\MirasvitGdpr\\": "src/MirasvitGdpr"
         }
     }
 }
