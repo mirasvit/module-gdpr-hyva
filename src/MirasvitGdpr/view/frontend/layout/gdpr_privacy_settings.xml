@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Privacy Settings</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Mirasvit\Gdpr\Block\Customer\Account\Dashboard" name="mst_gdpr_customer_account_dashboard" after="-" template="Mirasvit_Gdpr::customer/account/dashboard.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

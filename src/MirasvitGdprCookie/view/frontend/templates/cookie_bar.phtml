@@ -2,23 +2,39 @@
 /** @var \Mirasvit\GdprCookie\Block\CookieBar $block */
 $isShowDeclineButton = $block->isShowDeclineButton();
 ?>
-<div class="mst-gdpr__cookie-bar-wrapper" id="gdprCookieBar" x-data="initMstGdprCookieBar()" x-init="initDisplay()">
-    <div class="mst-gdpr__cookie-bar">
+<div class="mst-gdpr__cookie-bar-wrapper block relative z-20" id="gdprCookieBar" x-data="initMstGdprCookieBar()" x-init="initDisplay()">
+    <div class="mst-gdpr__cookie-bar bg-white border border-gray-200 bottom-8 fixed flex items-center left-2 max-w-4xl md:max-w-2xl md:rounded-full px-12 py-8 rounded-xl shadow-md z-50"
+         x-bind:class="{'opacity-70': isLoading}"
+         x-show="isBarVisible"
+         style="display: none">
         <div class="consent-text">
             <?= $block->getPolicyText() ?>
         </div>
 
-        <div class="mst-gdpr__buttons">
-            <button type="button" class="action" data-trigger-settings="trigger">
+        <div class="mst-gdpr__buttons flex flex-col md:flex-row">
+            <button type="button"
+                    class="action btn justify-center md:mr-2 md:px-2 mr-auto px-4 text-sm w-auto xl:px-4"
+                    x-bind:class="{'opacity-0': isLoading}"
+                    @click="openSettings">
                 <span><?= __('Settings') ?></span>
             </button>
 
-            <button class="action primary" data-trigger-settings="agree"><?= __('Agree All') ?></button>
+            <button class="action btn btn-primary justify-center md:mt-0 md:mr-2 md:px-2 mr-auto mt-4 mx-auto px-4 text-sm w-auto xl:px-4"
+                    data-trigger-settings="agree"
+                    x-bind:class="{'opacity-0': isLoading}"
+                    @click="handleAllow(1)"><span><?= __('Agree') ?></span></button>
             <?php if ($isShowDeclineButton): ?>
-                <button class="action" data-trigger-settings="decline"><?= __('Decline') ?></button>
+                <button
+                    class="action btn justify-center md:mt-0 md:px-2 mr-auto mt-4 mx-auto px-4 text-sm w-auto xl:px-4"
+                    data-trigger-settings="agree"
+                    x-bind:class="{'opacity-0': isLoading}"
+                    @click="handleDecline"><span><?= __('Decline') ?></span></button>
             <?php endif; ?>
         </div>
     </div>
+    <div class="mst-gdpr__cookie-bar-overlay bg-white fixed h-full left-0 opacity-60 top-0 w-full z-40"
+         style="display: none"
+         id="gdprCookieBarOverlay" x-show="isScreenLocked"></div>
 </div>
 <div class="mst-gdpr__cookie-bar-overlay" id="gdprCookieBarOverlay"></div>
 <script>
@@ -42,10 +58,12 @@ $isShowDeclineButton = $block->isShowDeclineButton();
             },
             show: function () {
                 this.isBarVisible = true;
+
                 this.isScreenLocked = window.location.href.indexOf('cookie') === -1 && <?= (int) $isOverlayEnabled ?>;
                 if (this.isScreenLocked) {
                     document.querySelector('body').style.overflow = 'hidden';
                 }
+
             },
             hide: function () {
                 this.isBarVisible = false;
