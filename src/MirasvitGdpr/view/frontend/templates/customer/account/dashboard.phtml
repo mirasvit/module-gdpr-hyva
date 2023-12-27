@@ -1,32 +1,37 @@
 <?php
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Dashboard $block */
+
 ?>
 <div class="block">
     <div class="block-title">
         <strong><?= __('Privacy Dashboard') ?></strong>
     </div>
     <div class="block-content">
-        <div class="mst_gdpr_dashboard_items">
-            <ol>
-                <li>
-                    <a href="/privacy-policy-cookie-restriction-mode">Privacy Policy Cookie Restriction</a>
-                </li>
-            </ol>
-            <ol>
-                <li>
-                    <a href="anonymize">Anonymize my account</a>
-                </li>
-            </ol>
-            <ol>
-                <li>
-                    <a href="download">Download personal data</a>
-                </li>
-            </ol>
-            <ol>
-                <li>
-                    <a href="remove">Delete my account</a>
-                </li>
-            </ol>
+        <div class="mst-gdpr_customer grid grid-cols-3 gap-4">
+            <div id="mst-customer_anonymize"><a href="<?= $block->escapeUrl($block->getAnonymizeUrl()) ?>">
+                    <?= __('Anonymize'); ?>
+                </a>
+            </div>
+            <div id="mst-customer_delete"><a href="<?= $block->escapeUrl($block->getDeleteUrl()) ?>">
+                    <?= __('Delete'); ?>
+                </a>
+            </div>
+            <div id="mst-customer_download"><a href="<?= $block->escapeUrl($block->getDownloadUrl()) ?>">
+                    <?= __('Download'); ?>
+                </a>
+            </div>
+            <div id="mst-customer_download"><a href="<?= $block->escapeUrl($block->getConsentsUrl()) ?>">
+                    <?= __('My Consents'); ?>
+                </a>
+            </div>
+            <div id="mst-customer_consent">
+                <a  style="cursor: pointer"
+                    x-data="initMstGdprCookieBar()"
+                    @click="openSettings">
+                    <?= __('Cookie Consent') ?>
+                </a>
+            </div>
         </div>
     </div>
+</div>
 </div>

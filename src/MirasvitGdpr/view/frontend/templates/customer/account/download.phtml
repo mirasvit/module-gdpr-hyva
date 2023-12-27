@@ -1,54 +1,40 @@
 <?php
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Anonymize $block */
 ?>
-<div class="block">
-    <div class="block-title">
+<div class="block mt-8">
+    <div class="block-title text-xl">
         <strong><?= __('Download personal data') ?></strong>
     </div>
 
-    <div class="block-content">
-        <div id="download-intro">
-            <p><?= __('You can download all your data that we have stored by clicking the button below:') ?></p>
-            <div class="actions-toolbar">
-                <button
-                    type="button"
-                    class="action"
-                    data-show="download-form"
-                    aria-controls="download-form"
-                    aria-expanded="false"
-                    data-expanded-text="<?= __('Hide') ?>"
-                    data-collapsed-text="<?= __('Process') ?>">
-
-                    <span><?= __('Process') ?></span>
-                </button>
-            </div>
-        </div>
-
-        <form method="post" action="<?= $block->getUrl('gdpr/customer/download') ?>" data-mage-init='{"validation":{}}'>
+    <div class="block-content" x-data="{active: false}">
+        <form method="post" action="<?= $block->getUrl('gdpr/customer/download') ?>">
             <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
 
-            <fieldset class="fieldset" hidden="hidden" id="download-form" role="region">
+            <fieldset class="fieldset" style="display: none" id="download-form" x-show="active">
                 <div class="field required">
-                    <label class="label" for="current-password-download">
+                    <label class="label" for="dl-current-password">
                         <span><?= __('Current Password') ?></span>
                     </label>
                     <div class="control">
-                        <input id="current-password-download" type="password" class="input-text" name="password" autocomplete="off" aria-required="true" data-validate="{required:true}">
+                        <input id="dl-current-password" type="password" class="input-text" name="password" autocomplete="off" aria-required="true" required/>
                     </div>
                 </div>
-                <?php if ($points = $block->getIsCustomerHasPassword()): ?>
-                    <p class="mst_gdpr_no_password">
-                        <?= __('Please, sing out and use "Forgot Password" link if you used Social Login to sign up the store. You have to register with default registration form to download personal data, as we do not store your social password.') ?>
-                    </p>
-                <?php endif; ?>
+
                 <div class="actions-toolbar">
-                    <button type="submit" class="action primary">
+                    <button type="submit" class="action primary btn btn-primary">
                         <span><?= __('Download') ?></span>
                     </button>
                 </div>
             </fieldset>
         </form>
+
+        <div id="download-intro" x-show="! active">
+            <p><?= __('You can download all your data that we have stored by clicking the button below:') ?></p>
+            <div class="actions-toolbar">
+                <button type="button" class="action btn" data-show="download-form" data-hide="download-intro" @click="active=true">
+                    <span><?= __('Process') ?></span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
-
-<script type="text/x-magento-init"><?= \Mirasvit\Core\Service\SerializeService::encode(['*' => ['Mirasvit_Gdpr/js/customer/account/requestForm' => []]]) ?></script>
