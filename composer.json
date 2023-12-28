@@ -13,14 +13,14 @@
     ],
     "autoload": {
         "files": [
-            "src/MirasvitGdpr/registration.php",
-            "src/MirasvitGdprConsent/registration.php",
-            "src/MirasvitGdprCookie/registration.php"
+            "src/GdprHyva/registration.php",
+            "src/GdprConsentHyva/registration.php",
+            "src/GdprCookieHyva/registration.php"
         ],
         "psr-4": {
-            "Hyva\\MirasvitGdpr\\": "src/MirasvitGdpr",
-            "Hyva\\MirasvitGdprConsent\\": "src/MirasvitGdprConsent",
-            "Hyva\\MirasvitGdprCookie\\": "src/MirasvitGdprCookie"
+            "Mirasvit\\GdprHyva\\": "src/GdprHyva",
+            "Mirasvit\\GdprConsentHyva\\": "src/GdprConsentHyva",
+            "Mirasvit\\GdprCookieHyva\\": "src/GdprCookieHyva"
         }
     }
 }

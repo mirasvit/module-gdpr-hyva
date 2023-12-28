@@ -8,4 +8,4 @@
 
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Hyva_MirasvitGdpr', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Mirasvit_GdprHyva', __DIR__);
