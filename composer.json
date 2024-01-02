@@ -1,0 +1,26 @@
+{
+    "name": "mirasvit/module-gdpr-hyva",
+    "description": "GDPR - Hyva",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "require": {
+        "magento/framework": "*",
+        "hyva-themes/magento2-compat-module-fallback": "*",
+        "mirasvit/module-gdpr": ">=1.2.16|dev-master|dev-develop"
+    },
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "src/MirasvitGdpr/registration.php",
+            "src/MirasvitGdprConsent/registration.php",
+            "src/MirasvitGdprCookie/registration.php"
+        ],
+        "psr-4": {
+            "Hyva\\MirasvitGdpr\\": "src/MirasvitGdpr",
+            "Hyva\\MirasvitGdprConsent\\": "src/MirasvitGdprConsent",
+            "Hyva\\MirasvitGdprCookie\\": "src/MirasvitGdprCookie"
+        }
+    }
+}
