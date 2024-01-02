@@ -3,9 +3,9 @@
     <type name="Hyva\CompatModuleFallback\Model\CompatModuleRegistry">
         <arguments>
             <argument name="compatModules" xsi:type="array">
-                <item name="mirasvit_magento2-hyva-gdpr-consent" xsi:type="array">
-                    <item name="original_module" xsi:type="string">Mirasvit_GdprConsent</item>
-                    <item name="compat_module" xsi:type="string">Mirasvit_GdprConsentHyva</item>
+                <item name="hyva_magento2-mirasvit-gdpr-cookie" xsi:type="array">
+                    <item name="original_module" xsi:type="string">Mirasvit_GdprCookie</item>
+                    <item name="compat_module" xsi:type="string">Hyva_MirasvitGdprCookie</item>
                 </item>
             </argument>
         </arguments>
