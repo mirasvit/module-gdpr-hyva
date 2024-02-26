@@ -1,37 +1,110 @@
 <?php
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Dashboard $block */
 
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Customer\Block\Account\Dashboard\Address;
+use Magento\Framework\Escaper;
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
 ?>
 <div class="block">
-    <div class="block-title">
-        <strong><?= __('Privacy Dashboard') ?></strong>
-    </div>
+    <div class="mb-6 text-2xl block-title"><?= __('Privacy Dashboard') ?></div>
+
     <div class="block-content">
-        <div class="mst-gdpr_customer grid grid-cols-3 gap-4">
-            <div id="mst-customer_anonymize"><a href="<?= $block->escapeUrl($block->getAnonymizeUrl()) ?>">
-                    <?= __('Anonymize'); ?>
-                </a>
+        <div class="mst-gdpr_customer grid lg:grid-cols-2 gap-4">
+            <div class="card">
+                <div class="flex gap-4">
+                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                        <?= $heroicons->refreshHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-medium mb-2">Anonymize personal data</h3>
+                        <p class="text-sm mb-2">You can request the anonymization of the personal data we have stored.</p>
+                        <a href="<?= $block->escapeUrl($block->getAnonymizeUrl()) ?>" class="flex justify-end items-center hover:underline">
+                            <?= __('Details') ?>
+
+                            <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div id="mst-customer_delete"><a href="<?= $block->escapeUrl($block->getDeleteUrl()) ?>">
-                    <?= __('Delete'); ?>
-                </a>
+
+            <div class="card">
+                <div class="flex gap-4">
+                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                        <?= $heroicons->archiveHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
+                    </div>
+
+                    <div class="grow">
+                        <h3 class="text-xl font-medium mb-2">Delete account</h3>
+                        <p class="text-sm mb-2">You can request the deletion of your data, including the account that we have stored.</p>
+                        <a href="<?= $block->escapeUrl($block->getDeleteUrl()) ?>" class="flex justify-end items-center hover:underline">
+                            <?= __('Details') ?>
+
+                            <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div id="mst-customer_download"><a href="<?= $block->escapeUrl($block->getDownloadUrl()) ?>">
-                    <?= __('Download'); ?>
-                </a>
+
+            <div class="card">
+                <div class="flex gap-4">
+                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                        <?= $heroicons->downloadHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
+                    </div>
+
+                    <div class="grow">
+                        <h3 class="text-xl font-medium mb-2">Download personal data</h3>
+                        <p class="text-sm mb-2">You can download and review all of your personal data that we have stored.</p>
+                        <a href="<?= $block->escapeUrl($block->getDownloadUrl()) ?>" class="flex justify-end items-center hover:underline">
+                            <?= __('Details') ?>
+
+                            <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div id="mst-customer_download"><a href="<?= $block->escapeUrl($block->getConsentsUrl()) ?>">
-                    <?= __('My Consents'); ?>
-                </a>
+
+
+            <div class="card">
+                <div class="flex gap-4">
+                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                        <?= $heroicons->flagHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
+                    </div>
+
+                    <div class="grow">
+                        <h3 class="text-xl font-medium mb-2">My Consents</h3>
+                        <p class="text-sm mb-2">You can review all content that you provide during navigation in the store.</p>
+                        <a href="<?= $block->escapeUrl($block->getConsentsUrl()) ?>" class="flex justify-end items-center hover:underline">
+                            <?= __('Details') ?>
+
+                            <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div id="mst-customer_consent">
-                <a  style="cursor: pointer"
-                    x-data="initMstGdprCookieBar()"
-                    @click="openSettings">
-                    <?= __('Cookie Consent') ?>
-                </a>
+
+
+            <div class="card">
+                <div class="flex gap-4">
+                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                        <?= $heroicons->collectionHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
+                    </div>
+
+                    <div class="grow">
+                        <h3 class="text-xl font-medium mb-2">Cookie Consent</h3>
+                        <p class="text-sm mb-2">You can review your cookie contents and update them if necessary.</p>
+                        <a href="#" class="flex justify-end items-center hover:underline" x-data="initMstGdprCookieBar()" @click="openSettings">
+                            <?= __('Details') ?>
+
+                            <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

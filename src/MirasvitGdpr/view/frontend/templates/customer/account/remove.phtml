@@ -1,20 +1,16 @@
 <?php
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Remove $block */
 ?>
-<div class="block" mt-8>
-    <div class="block-title text-xl">
-        <strong><?= __('Delete account') ?></strong>
-    </div>
+<div class="block">
+    <div class="mb-6 text-2xl block-title"><?= __('Delete account') ?></div>
 
-    <div class="block-content" x-data="{active: false}">
-
-
+    <div class="block-content card" x-data="{active: false}">
         <form method="post" action="<?= $block->getUrl('gdpr/customer/remove') ?>">
             <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
 
             <fieldset class="fieldset" style="display: none" x-show="active" id="remove-form">
                 <div class="field">
-                    <p><strong><?= __('Please keep in mind that we are deleting your account. After the deletion of your account, you will not be able to access your account anymore.') ?></strong></p>
+                    <p class="mb-4"><strong><?= __('Please keep in mind that we are deleting your account. After the deletion of your account, you will not be able to access your account anymore.') ?></strong></p>
                 </div>
 
                 <div class="field required">
@@ -22,30 +18,26 @@
                         <span><?= __('Current Password') ?></span>
                     </label>
                     <div class="control">
-                        <input id="rm-current-password" type="password" class="input-text" name="password" autocomplete="off" aria-required="true" required/>
+                        <input id="rm-current-password" type="password" class="form-input" name="password" autocomplete="off" aria-required="true" required/>
                     </div>
                 </div>
 
-                <div class="field choice required">
+                <div class="field choice required mb-4">
                     <input type="checkbox" id="remove_accept" required name="accept" value="1" class="checkbox">
                     <label for="remove_accept" class="label"><span><?= __('I understand and want remove my personal data') ?></span></label>
                 </div>
 
-                <div class="actions-toolbar">
-                    <button type="submit" class="action btn btn-primary">
-                        <span><?= __('Send request') ?></span>
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span><?= __('Send request') ?></span>
+                </button>
             </fieldset>
         </form>
 
         <div id="remove-intro" x-show="!active">
-            <p><?= __('You can request the deletion of your data that we have stored by clicking the button below:') ?></p>
-            <div class="actions-toolbar">
-                <button type="button" class="action btn" @click="active=true">
-                    <span><?= __('Delete my account') ?></span>
-                </button>
-            </div>
+            <p class="mb-2"><?= __('You can request the deletion of your data that we have stored by clicking the button below:') ?></p>
+            <button type="button" class="btn btn-primary" @click="active=true">
+                <span><?= __('Delete my account') ?></span>
+            </button>
         </div>
     </div>
 </div>
