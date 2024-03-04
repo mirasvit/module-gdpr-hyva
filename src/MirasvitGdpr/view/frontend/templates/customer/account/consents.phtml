@@ -1,0 +1,47 @@
+<?php
+/** @var \Mirasvit\Gdpr\Block\Customer\Account\Consents $block */
+$collection = $block->getAllCustomerConsents();
+?>
+<div class="block">
+    <div class="mb-6 text-2xl block-title"><?= __('My Consent Choices') ?></div>
+
+
+    <div class="block-content overflow-x-auto card mb-4">
+        <div class="table-wrapper orders-recent">
+            <?php
+            if ($collection && $collection->count()): ?>
+                <?= $block->getToolbarHtml() ?>
+                <table class="data-table table w-full sm:table-fixed lg:table-auto">
+                    <thead class="text-sm text-secondary">
+                    <tr>
+                        <th class="p-2 text-start"><?= __('ID') ?></th>
+                        <th class="p-2 text-start"><?= __('Ip') ?></th>
+                        <th class="p-2 text-start"><?= __('Consent Type') ?></th>
+                        <th class="p-2 text-start"><?= __('Created') ?></th>
+                        <th class="p-2 text-start"><?= __('Cookie Groups') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($collection as $consent): ?>
+                        <tr class="align-top even:bg-container-darker">
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('ID') ?>"><?= $consent->getId() ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Ip') ?>"><?= __($consent->getRemoteAddr()) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Consent Type') ?>"><?= __($consent->getType()) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Created') ?>"><?= $consent->getCreatedAt() ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Cookie Groups') ?>"><?= $block->getCookieGroupNames($consent) ?></td>
+                        </tr>
+                    <?php
+                    endforeach ?>
+                    </tbody>
+                </table>
+            <?php
+            else: ?>
+                <p><?= __('You have no consents yet.') ?></p>
+            <?php
+            endif ?>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,27 @@
+<?php
+/** @var \Mirasvit\GdprCookie\Block\CookieFilter $block */
+?>
+<script>
+
+    (function (config) {
+        function deleteDisallowedCookies() {
+
+            if (!hyva.getCookie(config.consentCookieName)) {
+                return;
+            }
+
+            const allowedGroups = unescape(hyva.getCookie(config.groupCookieName)).split(',');
+            const groupIds = Object.keys(config.groups || {});
+            const disallowedGroupIds = groupIds.filter(groupId => !allowedGroups.includes(groupId));
+
+            setInterval(() => {
+                disallowedGroupIds.forEach(groupId => {
+                    config.groups[groupId].forEach(cookieCode => hyva.setCookie(cookieCode, '', -1));
+                });
+            }, 5000);
+        }
+
+        window.addEventListener('DOMContentLoaded', deleteDisallowedCookies, {once: true});
+
+    })(<?= json_encode($block->getJsonConfig()['*']['Mirasvit_GdprCookie/js/cookieFilter']) ?>)
+</script>
