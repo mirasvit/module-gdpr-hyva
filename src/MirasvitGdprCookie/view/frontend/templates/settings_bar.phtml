@@ -26,7 +26,7 @@ $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class)
                 <div class="cursor-pointer pt-1"
                      x-on:click="close"><?= $heroicons->xHtml('w-6 h-6', 6, 6); ?></div>
             </div>
-            <?= $block->getPopupDescription(); ?>
+            <?= $escaper->escapeHtml($block->getPopupDescription()); ?>
             <div class="group-content">
                 <?php foreach ($block->getCookieGroups() as $group): ?>
                     <?= /* @noEscape */ $block->getCookieGroupHtml($group); ?>
