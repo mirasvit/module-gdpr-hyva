@@ -1,6 +1,8 @@
 <?php
 /** @var SettingsModal $block */
+/** @var \Magento\Framework\Escaper $escaper */
 
+use Magento\Framework\Escaper;
 use Mirasvit\GdprCookie\Block\SettingsModal;
 
 /** @var \Hyva\Theme\Model\ViewModelRegistry $viewModels */
@@ -24,14 +26,14 @@ $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class)
                 <div class="cursor-pointer pt-1"
                      x-on:click="close"><?= $heroicons->xHtml('w-6 h-6', 6, 6); ?></div>
             </div>
-            <?= $block->getPopupDescription(); ?>
+            <?= $escaper->escapeHtml($block->getPopupDescription()); ?>
             <div class="group-content">
                 <?php foreach ($block->getCookieGroups() as $group): ?>
-                    <?= $block->getCookieGroupHtml($group); ?>
+                    <?= /* @noEscape */ $block->getCookieGroupHtml($group); ?>
                 <?php endforeach; ?>
             </div>
             <button class="btn btn-primary ml-auto mt-4 text-sm cursor-pointer"
-                    x-on:click="save"><span><?= __('Apply') ?></span></button></div>
+                    x-on:click="save"><span><?= $escaper->escapeHtml(__('Apply')) ?></span></button></div>
     </div>
 </div>
 <script>

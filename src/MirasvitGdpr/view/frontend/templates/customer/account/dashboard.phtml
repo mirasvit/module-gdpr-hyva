@@ -1,4 +1,6 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Dashboard $block */
 
 use Hyva\Theme\Model\ViewModelRegistry;
@@ -10,21 +12,22 @@ use Magento\Framework\Escaper;
 $heroicons = $viewModels->require(HeroiconsOutline::class);
 ?>
 <div class="block">
-    <div class="mb-6 text-2xl block-title"><?= __('Privacy Dashboard') ?></div>
+    <div class="mb-6 text-2xl block-title"><?= $escaper->escapeHtml(__('Privacy Dashboard')) ?></div>
 
     <div class="block-content">
         <div class="mst-gdpr_customer grid lg:grid-cols-2 gap-4">
             <div class="card">
                 <div class="flex gap-4">
-                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                    <div
+                        class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
                         <?= $heroicons->refreshHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
                     </div>
-
                     <div>
-                        <h3 class="text-xl font-medium mb-2">Anonymize personal data</h3>
-                        <p class="text-sm mb-2">You can request the anonymization of the personal data we have stored.</p>
-                        <a href="<?= $block->escapeUrl($block->getAnonymizeUrl()) ?>" class="flex justify-end items-center hover:underline">
-                            <?= __('Details') ?>
+                        <h3 class="text-xl font-medium mb-2"><?= $escaper->escapeHtml(__('Anonymize personal data')) ?></h3>
+                        <p class="text-sm mb-2"><?= $escaper->escapeHtml(__('You can request the anonymization of the personal data we have stored.')) ?></p>
+                        <a href="<?= $block->escapeUrl($block->getAnonymizeUrl()) ?>"
+                           class="flex justify-end items-center hover:underline">
+                            <?= $escaper->escapeHtml(__('Details')) ?>
 
                             <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
                         </a>
@@ -34,15 +37,17 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
 
             <div class="card">
                 <div class="flex gap-4">
-                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                    <div
+                        class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
                         <?= $heroicons->archiveHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
                     </div>
 
                     <div class="grow">
-                        <h3 class="text-xl font-medium mb-2">Delete account</h3>
-                        <p class="text-sm mb-2">You can request the deletion of your data, including the account that we have stored.</p>
-                        <a href="<?= $block->escapeUrl($block->getDeleteUrl()) ?>" class="flex justify-end items-center hover:underline">
-                            <?= __('Details') ?>
+                        <h3 class="text-xl font-medium mb-2"><?= $escaper->escapeHtml(__('Delete account')) ?></h3>
+                        <p class="text-sm mb-2"><?= $escaper->escapeHtml(__('You can request the deletion of your data, including the account that we have stored.')) ?></p>
+                        <a href="<?= $block->escapeUrl($block->getDeleteUrl()) ?>"
+                           class="flex justify-end items-center hover:underline">
+                            <?= $escaper->escapeHtml(__('Details')) ?>
 
                             <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
                         </a>
@@ -52,15 +57,17 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
 
             <div class="card">
                 <div class="flex gap-4">
-                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                    <div
+                        class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
                         <?= $heroicons->downloadHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
                     </div>
 
                     <div class="grow">
-                        <h3 class="text-xl font-medium mb-2">Download personal data</h3>
-                        <p class="text-sm mb-2">You can download and review all of your personal data that we have stored.</p>
-                        <a href="<?= $block->escapeUrl($block->getDownloadUrl()) ?>" class="flex justify-end items-center hover:underline">
-                            <?= __('Details') ?>
+                        <h3 class="text-xl font-medium mb-2"><?= $escaper->escapeHtml(__('Download personal data')) ?></h3>
+                        <p class="text-sm mb-2"><?= $escaper->escapeHtml(__('You can download and review all of your personal data that we have stored.')) ?></p>
+                        <a href="<?= $block->escapeUrl($block->getDownloadUrl()) ?>"
+                           class="flex justify-end items-center hover:underline">
+                            <?= $escaper->escapeHtml(__('Details')) ?>
 
                             <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
                         </a>
@@ -68,18 +75,19 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                 </div>
             </div>
 
-
             <div class="card">
                 <div class="flex gap-4">
-                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                    <div
+                        class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
                         <?= $heroicons->flagHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
                     </div>
 
                     <div class="grow">
-                        <h3 class="text-xl font-medium mb-2">My Consents</h3>
-                        <p class="text-sm mb-2">You can review all content that you provide during navigation in the store.</p>
-                        <a href="<?= $block->escapeUrl($block->getConsentsUrl()) ?>" class="flex justify-end items-center hover:underline">
-                            <?= __('Details') ?>
+                        <h3 class="text-xl font-medium mb-2"><?= $escaper->escapeHtml(__('My Consents')) ?></h3>
+                        <p class="text-sm mb-2"><?= $escaper->escapeHtml(__('You can review all content that you provide during navigation in the store.')) ?></p>
+                        <a href="<?= $block->escapeUrl($block->getConsentsUrl()) ?>"
+                           class="flex justify-end items-center hover:underline">
+                            <?= $escaper->escapeHtml(__('Details')) ?>
 
                             <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
                         </a>
@@ -87,19 +95,18 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                 </div>
             </div>
 
-
             <div class="card">
                 <div class="flex gap-4">
-                    <div class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
+                    <div
+                        class="inline-flex items-center justify-center shrink-0 w-16 h-16 rounded-full bg-container-darker text-secondary">
                         <?= $heroicons->collectionHtml('', 32, 32, ['aria-hidden' => 'true']) ?>
                     </div>
-
                     <div class="grow">
-                        <h3 class="text-xl font-medium mb-2">Cookie Consent</h3>
-                        <p class="text-sm mb-2">You can review your cookie contents and update them if necessary.</p>
-                        <a href="#" class="flex justify-end items-center hover:underline" x-data="initMstGdprCookieBar()" @click="openSettings">
-                            <?= __('Details') ?>
-
+                        <h3 class="text-xl font-medium mb-2"><?= $escaper->escapeHtml(__('Cookie Consent')) ?></h3>
+                        <p class="text-sm mb-2"><?= $escaper->escapeHtml(__('You can review your cookie contents and update them if necessary.')) ?></p>
+                        <a href="#" class="flex justify-end items-center hover:underline"
+                           x-data="initMstGdprCookieBar()" @click="openSettings">
+                            <?= $escaper->escapeHtml(__('Details')) ?>
                             <?= $heroicons->arrowRightHtml('ml-2', 16, 16, ['aria-hidden' => 'true']); ?>
                         </a>
                     </div>

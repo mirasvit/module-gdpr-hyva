@@ -1,4 +1,8 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
 /** @var Mirasvit\GdprCookie\Block\CookieGroupBlock $block */
 ?>
 <?php
@@ -14,35 +18,35 @@ $groupId = $group->getId();
 $disabled = $group->isRequired() ? 'disabled' : '';
 $checked  = !$group->isRequired() && !$block->getOptionalGroupsChecked() ? '' : 'checked';
 ?>
-<div class="cookie-group-container cookie-group-container-<?= $groupId; ?> border border-gray-300 mt-4 p-3 rounded-2xl shadow-sm"
-     x-data="{open<?= $groupId; ?>: false}">
+<div class="cookie-group-container cookie-group-container-<?= $escaper->escapeHtml($groupId); ?> border border-gray-300 mt-4 p-3 rounded-2xl shadow-sm"
+     x-data="{open<?= $escaper->escapeHtml($groupId); ?>: false}">
     <div class="flex flex justify-between">
         <h4 class="title text-lg cursor-pointer"
-            x-on:click="open<?= $groupId; ?> = !open<?= $groupId; ?>">
-            <span x-show="! open<?= $groupId; ?>"><?= $heroicons->chevronUpHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
-            <span x-show="open<?= $groupId; ?>" style="display: none"><?= $heroicons->chevronDownHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
+            x-on:click="open<?= $escaper->escapeHtml($groupId); ?> = !open<?= $escaper->escapeHtml($groupId); ?>">
+            <span x-show="! open<?= $escaper->escapeHtml($groupId); ?>"><?= $heroicons->chevronUpHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
+            <span x-show="open<?= $escaper->escapeHtml($groupId); ?>" style="display: none"><?= $heroicons->chevronDownHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
             <?= $escaper->escapeHtml(__($group->getName())); ?>
         </h4>
 
-        <input class="checkbox disabled:opacity-40" type="checkbox" value="1" <?= $disabled; ?> checked data-group-id="<?= $groupId; ?>" name="allowed-group-<?= $groupId; ?>">
+        <input class="checkbox disabled:opacity-40" type="checkbox" value="1" <?= $escaper->escapeHtml($disabled); ?> checked data-group-id="<?= $escaper->escapeHtml($groupId); ?>" name="allowed-group-<?= $escaper->escapeHtml($groupId); ?>">
     </div>
 
-    <div class="content mt-4 pl-5" x-show.transition.origin.top="open<?= $groupId; ?>" style="display: none">
+    <div class="content mt-4 pl-5" x-show.transition.origin.top="open<?= $escaper->escapeHtml($groupId); ?>" style="display: none">
         <div>
             <?= $escaper->escapeHtml(__($group->getDescription())); ?>
         </div>
         <div class="cookie-list">
             <table>
                 <tr>
-                    <th class="p-2"><?= __('Name') ?></th>
-                    <th class="p-2"><?= __('Description') ?></th>
-                    <th class="p-2"><?= __('Lifetime') ?></th>
+                    <th class="p-2"><?= $escaper->escapeHtml(__('Name')) ?></th>
+                    <th class="p-2"><?= $escaper->escapeHtml(__('Description')) ?></th>
+                    <th class="p-2"><?= $escaper->escapeHtml(__('Lifetime')) ?></th>
                 </tr>
                 <?php foreach ($block->getCookies() as $cookie): ?>
                     <tr>
                         <td class="p-2"><?= $escaper->escapeHtml($cookie->getName()) ?></td>
                         <td class="p-2"><?= $escaper->escapeHtml($cookie->getDescription()) ?></td>
-                        <td class="p-2"><?= $block->humanReadableLifetime($cookie->getLifetime()) ?></td>
+                        <td class="p-2"><?= $escaper->escapeHtml($block->humanReadableLifetime($cookie->getLifetime())) ?></td>
                     </tr>
                 <?php endforeach ?>
             </table>

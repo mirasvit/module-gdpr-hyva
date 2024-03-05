@@ -1,21 +1,28 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Remove $block */
 ?>
 <div class="block">
-    <div class="mb-6 text-2xl block-title"><?= __('Delete account') ?></div>
+    <div class="mb-6 text-2xl block-title"><?= $escaper->escapeUrl(__('Delete account')) ?></div>
 
     <div class="block-content card" x-data="{active: false}">
-        <form method="post" action="<?= $block->getUrl('gdpr/customer/remove') ?>">
-            <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('gdpr/customer/remove')) ?>">
+            <input name="form_key" type="hidden" value="<?= /* @noEscape **/ $block->getFormKey() ?>"/>
 
             <fieldset class="fieldset" style="display: none" x-show="active" id="remove-form">
                 <div class="field">
-                    <p class="mb-4"><strong><?= __('Please keep in mind that we are deleting your account. After the deletion of your account, you will not be able to access your account anymore.') ?></strong></p>
+                    <p class="mb-4">
+                        <strong><?= $escaper->escapeHtml(__('Please keep in mind that we are deleting your account. After the deletion of your account, you will not be able to access your account anymore.')) ?>
+                        </strong>
+                    </p>
                 </div>
 
                 <div class="field required">
                     <label class="label" for="rm-current-password">
-                        <span><?= __('Current Password') ?></span>
+                        <span><?= $escaper->escapeHtml(__('Current Password')) ?></span>
                     </label>
                     <div class="control">
                         <input id="rm-current-password" type="password" class="form-input" name="password" autocomplete="off" aria-required="true" required/>
@@ -24,19 +31,19 @@
 
                 <div class="field choice required mb-4">
                     <input type="checkbox" id="remove_accept" required name="accept" value="1" class="checkbox">
-                    <label for="remove_accept" class="label"><span><?= __('I understand and want remove my personal data') ?></span></label>
+                    <label for="remove_accept" class="label"><span><?= $escaper->escapeHtml(__('I understand and want remove my personal data')) ?></span></label>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
-                    <span><?= __('Send request') ?></span>
+                    <span><?= $escaper->escapeHtml(__('Send request')) ?></span>
                 </button>
             </fieldset>
         </form>
 
         <div id="remove-intro" x-show="!active">
-            <p class="mb-2"><?= __('You can request the deletion of your data that we have stored by clicking the button below:') ?></p>
+            <p class="mb-2"><?= $escaper->escapeHtml(__('You can request the deletion of your data that we have stored by clicking the button below:')) ?></p>
             <button type="button" class="btn btn-primary" @click="active=true">
-                <span><?= __('Delete my account') ?></span>
+                <span><?= $escaper->escapeHtml(__('Delete my account')) ?></span>
             </button>
         </div>
     </div>

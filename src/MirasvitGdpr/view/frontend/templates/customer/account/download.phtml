@@ -1,17 +1,21 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Anonymize $block */
 ?>
 <div class="block">
-    <div class="mb-6 text-2xl block-title"><?= __('Download personal data') ?></div>
+    <div class="mb-6 text-2xl block-title"><?= $escaper->escapeUrl(__('Download personal data')) ?></div>
 
     <div class="block-content card" x-data="{active: false}">
-        <form method="post" action="<?= $block->getUrl('gdpr/customer/download') ?>">
-            <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('gdpr/customer/download')) ?>">
+            <input name="form_key" type="hidden" value="<?= /* @noEscape */ $block->getFormKey() ?>"/>
 
             <fieldset class="fieldset" style="display: none" id="download-form" x-show="active">
                 <div class="field required mb-4">
                     <label class="label" for="dl-current-password">
-                        <span><?= __('Current Password') ?></span>
+                        <span><?= $escaper->escapeHtml(__('Current Password')) ?></span>
                     </label>
                     <div class="control">
                         <input id="dl-current-password" type="password" class="form-input" name="password" autocomplete="off" aria-required="true" required/>
@@ -19,15 +23,15 @@
                 </div>
 
                 <button type="submit" class="action primary btn btn-primary">
-                    <span><?= __('Download') ?></span>
+                    <span><?= $escaper->escapeUrl(__('Download')) ?></span>
                 </button>
             </fieldset>
         </form>
 
         <div id="download-intro" x-show="!active">
-            <p class="mb-2"><?= __('You can download all your data that we have stored by clicking the button below:') ?></p>
+            <p class="mb-2"><?= $escaper->escapeUrl(__('You can download all your data that we have stored by clicking the button below:')) ?></p>
             <button type="button" class="btn btn-primary" data-show="download-form" data-hide="download-intro" @click="active=true">
-                <span><?= __('Process') ?></span>
+                <span><?= $escaper->escapeUrl(__('Process')) ?></span>
             </button>
         </div>
     </div>
