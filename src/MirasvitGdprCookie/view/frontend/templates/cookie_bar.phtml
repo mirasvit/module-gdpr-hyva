@@ -1,5 +1,9 @@
 <?php
 /** @var \Mirasvit\GdprCookie\Block\CookieBar $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
 $isShowDeclineButton = $block->isShowDeclineButton();
 ?>
 <div class="mst-gdpr__cookie-bar-wrapper block relative z-20" id="gdprCookieBar" x-data="initMstGdprCookieBar()" x-init="initDisplay()">
@@ -8,7 +12,7 @@ $isShowDeclineButton = $block->isShowDeclineButton();
          x-show="isBarVisible"
          style="display: none">
         <div class="consent-text">
-            <?= $block->getPolicyText() ?>
+            <?= /* @noEscape */ $block->getPolicyText() ?>
         </div>
 
         <div class="mst-gdpr__buttons flex flex-col md:flex-row">
@@ -16,19 +20,19 @@ $isShowDeclineButton = $block->isShowDeclineButton();
                     class="action btn justify-center md:mr-2 md:px-2 mr-auto px-4 text-sm w-auto xl:px-4"
                     x-bind:class="{'opacity-0': isLoading}"
                     @click="openSettings">
-                <span><?= __('Settings') ?></span>
+                <span><?= $escaper->escapeHtml(__('Settings')) ?></span>
             </button>
 
             <button class="action btn btn-primary justify-center md:mt-0 md:mr-2 md:px-2 mr-auto mt-4 mx-auto px-4 text-sm w-auto xl:px-4"
                     data-trigger-settings="agree"
                     x-bind:class="{'opacity-0': isLoading}"
-                    @click="handleAllow(1)"><span><?= __('Agree') ?></span></button>
+                    @click="handleAllow(1)"><span><?= $escaper->escapeHtml(__('Agree')) ?></span></button>
             <?php if ($isShowDeclineButton): ?>
                 <button
                     class="action btn justify-center md:mt-0 md:px-2 mr-auto mt-4 mx-auto px-4 text-sm w-auto xl:px-4"
                     data-trigger-settings="agree"
                     x-bind:class="{'opacity-0': isLoading}"
-                    @click="handleDecline"><span><?= __('Decline') ?></span></button>
+                    @click="handleDecline"><span><?= $escaper->escapeHtml(__('Decline')) ?></span></button>
             <?php endif; ?>
         </div>
     </div>
@@ -86,7 +90,7 @@ $isShowDeclineButton = $block->isShowDeclineButton();
                     return body;
                 }, new URLSearchParams({form_key: hyva.getFormKey()}))
 
-                fetch('<?= $block->getUrl('gdpr_cookie/cookie/allow') ?>', {
+                fetch('<?= $escaper->escapeUrl($block->getUrl('gdpr_cookie/cookie/allow')) ?>', {
                     method: 'post',
                     body: body,
                     headers: {contentType: 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -99,7 +103,7 @@ $isShowDeclineButton = $block->isShowDeclineButton();
                 this.isLoading = true;
 
                 const body = new URLSearchParams({form_key: hyva.getFormKey()});
-                fetch('<?= $block->getUrl('gdpr_cookie/cookie/decline') ?>', {
+                fetch('<?= $escaper->escapeUrl($block->getUrl('gdpr_cookie/cookie/decline')) ?>', {
                     method: 'post',
                     body: body,
                     headers: {contentType: 'application/x-www-form-urlencoded; charset=UTF-8'}

@@ -1,4 +1,8 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
 /** @var Mirasvit\GdprCookie\Block\CookieGroupBlock $block */
 ?>
 <?php
@@ -9,7 +13,7 @@
 $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class);
 
 $group   = $block->getCookieGroup();
-$groupId = $group->getId();
+$groupId = $escaper->escapeHtml($group->getId());
 
 $disabled = $group->isRequired() ? 'disabled' : '';
 $checked  = !$group->isRequired() && !$block->getOptionalGroupsChecked() ? '' : 'checked';
@@ -24,7 +28,7 @@ $checked  = !$group->isRequired() && !$block->getOptionalGroupsChecked() ? '' : 
             <?= $escaper->escapeHtml(__($group->getName())); ?>
         </h4>
 
-        <input class="checkbox disabled:opacity-40" type="checkbox" value="1" <?= $disabled; ?> checked data-group-id="<?= $groupId; ?>" name="allowed-group-<?= $groupId; ?>">
+        <input class="checkbox disabled:opacity-40" type="checkbox" value="1" <?= $escaper->escapeHtml($disabled); ?> checked data-group-id="<?= $groupId; ?>" name="allowed-group-<?= $groupId; ?>">
     </div>
 
     <div class="content mt-4 pl-5" x-show.transition.origin.top="open<?= $groupId; ?>" style="display: none">
@@ -34,15 +38,15 @@ $checked  = !$group->isRequired() && !$block->getOptionalGroupsChecked() ? '' : 
         <div class="cookie-list">
             <table>
                 <tr>
-                    <th class="p-2"><?= __('Name') ?></th>
-                    <th class="p-2"><?= __('Description') ?></th>
-                    <th class="p-2"><?= __('Lifetime') ?></th>
+                    <th class="p-2"><?= $escaper->escapeHtml(__('Name')) ?></th>
+                    <th class="p-2"><?= $escaper->escapeHtml(__('Description')) ?></th>
+                    <th class="p-2"><?= $escaper->escapeHtml(__('Lifetime')) ?></th>
                 </tr>
                 <?php foreach ($block->getCookies() as $cookie): ?>
                     <tr>
                         <td class="p-2"><?= $escaper->escapeHtml($cookie->getName()) ?></td>
                         <td class="p-2"><?= $escaper->escapeHtml($cookie->getDescription()) ?></td>
-                        <td class="p-2"><?= $block->humanReadableLifetime($cookie->getLifetime()) ?></td>
+                        <td class="p-2"><?= $escaper->escapeHtml($block->humanReadableLifetime($cookie->getLifetime())) ?></td>
                     </tr>
                 <?php endforeach ?>
             </table>

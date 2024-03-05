@@ -1,23 +1,27 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Anonymize $block */
 ?>
 <div class="block">
-    <div class="mb-6 text-2xl block-title"><?= __('Anonymize personal data') ?></div>
+    <div class="mb-6 text-2xl block-title"><?= $escaper->escapeHtml(__('Anonymize personal data')) ?></div>
 
     <div class="block-content card" x-data="{active: false}">
-        <form method="post" action="<?= $block->getUrl('gdpr/customer/anonymize') ?>">
+        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('gdpr/customer/anonymize')) ?>">
             <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
 
             <fieldset class="fieldset" style="display: none" id="anonymize-form" x-show="active">
                 <div class="field">
-                    <p class="mb-1"><strong><?= __('To anonymize your account as well as your data from our website, please submit the form.') ?></strong></p>
-                    <p class="mb-1"><?= __('Please be aware that we will delete your addresses and will update your name to Anonymous.') ?></p>
-                    <p class="mb-2"><?= __('We will also update your name in the orders. Kindly ensure that you do not have any pending orders.') ?></p>
+                    <p class="mb-1"><strong><?= $escaper->escapeHtml(__('To anonymize your account as well as your data from our website, please submit the form.')) ?></strong></p>
+                    <p class="mb-1"><?= $escaper->escapeHtml(__('Please be aware that we will delete your addresses and will update your name to Anonymous.')) ?></p>
+                    <p class="mb-2"><?= $escaper->escapeHtml(__('We will also update your name in the orders. Kindly ensure that you do not have any pending orders.')) ?></p>
                 </div>
 
                 <div class="field required">
                     <label class="label" for="anon-current-password">
-                        <span><?= __('Current Password') ?></span>
+                        <span><?= $escaper->escapeHtml(__('Current Password')) ?></span>
                     </label>
                     <div class="control">
                         <input id="anon-current-password" type="password" class="form-input" name="password" autocomplete="off" required aria-required="true">
@@ -26,19 +30,19 @@
 
                 <div class="field choice required mb-2">
                     <input type="checkbox" id="anonymize_accept" required name="accept" value="1" class="checkbox">
-                    <label for="anonymize_accept" class="label"><span><?= __('I understand and want anonymize my personal data') ?></span></label>
+                    <label for="anonymize_accept" class="label"><span><?= $escaper->escapeHtml(__('I understand and want anonymize my personal data')) ?></span></label>
                 </div>
 
                 <button type="submit" class="action btn btn-primary">
-                    <span><?= __('Process') ?></span>
+                    <span><?= $escaper->escapeHtml(__('Process')) ?></span>
                 </button>
             </fieldset>
         </form>
 
         <div id="anonymize-intro" x-show="!active">
-            <p class="mb-2"><?= __('You can request the anonymization of your personal data that we have stored by clicking the button below:') ?></p>
+            <p class="mb-2"><?= $escaper->escapeHtml(__('You can request the anonymization of your personal data that we have stored by clicking the button below:')) ?></p>
             <button type="button" class="btn btn-primary" data-show="anonymize-form" data-hide="anonymize-intro" @click="active=true">
-                <span><?= __('Anonymize my account') ?></span>
+                <span><?= $escaper->escapeHtml(__('Anonymize my account')) ?></span>
             </button>
         </div>
     </div>

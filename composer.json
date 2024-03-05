@@ -6,7 +6,7 @@
     "require": {
         "magento/framework": "*",
         "hyva-themes/magento2-compat-module-fallback": "*",
-        "mirasvit/module-gdpr": ">=1.3.4|dev-master|dev-develop"
+        "mirasvit/module-gdpr": ">=1.3.4|dev-develop"
     },
     "license": [
         "proprietary"
