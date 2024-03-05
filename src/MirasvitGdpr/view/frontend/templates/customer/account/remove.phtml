@@ -6,7 +6,7 @@ use Magento\Framework\Escaper;
 /** @var \Mirasvit\Gdpr\Block\Customer\Account\Remove $block */
 ?>
 <div class="block">
-    <div class="mb-6 text-2xl block-title"><?= __('Delete account') ?></div>
+    <div class="mb-6 text-2xl block-title"><?= $escaper->escapeUrl(__('Delete account')) ?></div>
 
     <div class="block-content card" x-data="{active: false}">
         <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('gdpr/customer/remove')) ?>">

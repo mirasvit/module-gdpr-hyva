@@ -10,7 +10,7 @@ use Magento\Framework\Escaper;
 
     <div class="block-content card" x-data="{active: false}">
         <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('gdpr/customer/anonymize')) ?>">
-            <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>"/>
+            <input name="form_key" type="hidden" value="<?= /* @noEscape **/ $block->getFormKey() ?>"/>
 
             <fieldset class="fieldset" style="display: none" id="anonymize-form" x-show="active">
                 <div class="field">

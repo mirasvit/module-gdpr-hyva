@@ -7,7 +7,7 @@ use Magento\Framework\Escaper;
 $collection = $block->getAllCustomerConsents();
 ?>
 <div class="block">
-    <div class="mb-6 text-2xl block-title"><?= __('My Consent Choices') ?></div>
+    <div class="mb-6 text-2xl block-title"><?= $escaper->escapeHtml(__('My Consent Choices')) ?></div>
 
 
     <div class="block-content overflow-x-auto card mb-4">
@@ -18,22 +18,22 @@ $collection = $block->getAllCustomerConsents();
                 <table class="data-table table w-full sm:table-fixed lg:table-auto">
                     <thead class="text-sm text-secondary">
                     <tr>
-                        <th class="p-2 text-start"><?= __('ID') ?></th>
-                        <th class="p-2 text-start"><?= __('Ip') ?></th>
-                        <th class="p-2 text-start"><?= __('Consent Type') ?></th>
-                        <th class="p-2 text-start"><?= __('Created') ?></th>
-                        <th class="p-2 text-start"><?= __('Cookie Groups') ?></th>
+                        <th class="p-2 text-start"><?= $escaper->escapeHtml(__('ID')) ?></th>
+                        <th class="p-2 text-start"><?= $escaper->escapeHtml(__('Ip')) ?></th>
+                        <th class="p-2 text-start"><?= $escaper->escapeHtml(__('Consent Type')) ?></th>
+                        <th class="p-2 text-start"><?= $escaper->escapeHtml(__('Created')) ?></th>
+                        <th class="p-2 text-start"><?= $escaper->escapeHtml(__('Cookie Groups')) ?></th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
                     foreach ($collection as $consent): ?>
                         <tr class="align-top even:bg-container-darker">
-                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('ID') ?>"><?= $consent->getId() ?></td>
-                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Ip') ?>"><?= __($consent->getRemoteAddr()) ?></td>
-                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Consent Type') ?>"><?= __($consent->getType()) ?></td>
-                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Created') ?>"><?= $consent->getCreatedAt() ?></td>
-                            <td class="p-2 hidden lg:table-cell" data-th="<?= __('Cookie Groups') ?>"><?= $block->getCookieGroupNames($consent) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= $escaper->escapeHtml(__('ID')) ?>"><?= $escaper->escapeHtml($consent->getId()) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= $escaper->escapeHtml(__('Ip')) ?>"><?= $escaper->escapeHtml(__($consent->getRemoteAddr())) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= $escaper->escapeHtml(__('Consent Type')) ?>"><?= $escaper->escapeHtml(__($consent->getType())) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= $escaper->escapeHtml(__('Created')) ?>"><?= $escaper->escapeHtml($consent->getCreatedAt()) ?></td>
+                            <td class="p-2 hidden lg:table-cell" data-th="<?= $escaper->escapeHtml(__('Cookie Groups')) ?>"><?= $escaper->escapeHtml($block->getCookieGroupNames($consent)) ?></td>
                         </tr>
                     <?php
                     endforeach ?>
@@ -41,7 +41,7 @@ $collection = $block->getAllCustomerConsents();
                 </table>
             <?php
             else: ?>
-                <p><?= __('You have no consents yet.') ?></p>
+                <p><?= $escaper->escapeHtml(__('You have no consents yet.')) ?></p>
             <?php
             endif ?>
         </div>
