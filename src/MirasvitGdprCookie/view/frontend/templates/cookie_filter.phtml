@@ -1,4 +1,7 @@
 <?php
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Magento\Framework\Escaper;
 /** @var \Mirasvit\GdprCookie\Block\CookieFilter $block */
 ?>
 <script>
@@ -23,5 +26,5 @@
 
         window.addEventListener('DOMContentLoaded', deleteDisallowedCookies, {once: true});
 
-    })(<?= json_encode($block->getJsonConfig()['*']['Mirasvit_GdprCookie/js/cookieFilter']) ?>)
+    })(<?= /* @noEscape */ json_encode($block->getJsonConfig()['*']['Mirasvit_GdprCookie/js/cookieFilter']) ?>)
 </script>

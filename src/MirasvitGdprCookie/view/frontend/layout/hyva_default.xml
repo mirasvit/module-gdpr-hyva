@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="footer">
+        <referenceBlock name="footer-content">
+            <block class="Mirasvit\GdprCookie\Block\ConsentSettingsButton"
+                   name="mst_hyva_gdpr_cookie_consent_settings_button"
+                   template="Mirasvit_GdprCookie::consent_settings_button.phtml" after="-">
+            </block>
+        </referenceBlock>
+    </referenceContainer>
+    <referenceBlock name="mst_gdpr_cookie_consent_settings_button" remove="true"/>
+</page>
