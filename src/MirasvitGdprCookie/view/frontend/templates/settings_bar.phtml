@@ -1,10 +1,5 @@
 <?php
-/** @var SettingsModal $block */
-/** @var \Magento\Framework\Escaper $escaper */
-
-use Magento\Framework\Escaper;
-use Mirasvit\GdprCookie\Block\SettingsModal;
-
+/** @var \Mirasvit\GdprCookie\Block\SettingsModal $block */
 /** @var \Hyva\Theme\Model\ViewModelRegistry $viewModels */
 /** @var \Hyva\Theme\ViewModel\HeroiconsOutline $heroicons */
 /** @var \Magento\Framework\Escaper $escaper */
@@ -31,6 +26,40 @@ $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class)
                 <?php foreach ($block->getCookieGroups() as $group): ?>
                     <?= /* @noEscape */ $block->getCookieGroupHtml($group); ?>
                 <?php endforeach; ?>
+                <?php if ($block->isGoogleConsentModeEnabled()): ?>
+                    <div class="google-consent-container border border-gray-300 mt-4 p-3 rounded-2xl shadow-sm"
+                         x-data="{open_google_consent_settings: false}">
+
+                        <div class="flex flex justify-between">
+                            <h4 class="title text-lg cursor-pointer"
+                                x-on:click="open_google_consent_settings = !open_google_consent_settings">
+                                <span
+                                    x-show="! open_google_consent_settings"><?= $heroicons->chevronUpHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
+                                <span x-show="open_google_consent_settings"
+                                      style="display: none"><?= $heroicons->chevronDownHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
+                                <?= $escaper->escapeHtml(__('Google Consent')); ?>
+                            </h4>
+                        </div>
+
+                        <div class="content mt-4 pl-5" x-show.transition.origin.top="open_google_consent_settings"
+                             style="display: none">
+                            <div class="cookie-list">
+                                <table>
+                                    <?php foreach ($block->getGoogleConsentTypes() as $type): ?>
+                                        <tr>
+                                            <td class="p-2"><?= /* @noEscape */$type ?></td>
+                                            <td class="p-2">
+                                                <input class="checkbox disabled:opacity-40" type="checkbox" value="1"
+                                                       name="google_consent_<?= /* @noEscape */$type ?>"
+                                                       data-consent-type="<?= /* @noEscape */$type ?>">
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
             <button class="btn btn-primary ml-auto mt-4 text-sm cursor-pointer"
                     x-on:click="save"><span><?= $escaper->escapeHtml(__('Apply')) ?></span></button></div>

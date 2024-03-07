@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+/** @var  \Mirasvit\GdprCookie\Block\ConsentSettingsButton $block */
+if (!$block->isShow()) {
+    return;
+}
+
+$caption = $block->getCaption();
+?>
+
+<div class="footer links mst-gdpr-cookie-consent-settings" x-data="initMstHyvaGdprCookieFooterButton()"
+     @click="openCookieBar()">
+    <span><?= $block->escapeHtml(__($caption)) ?></span>
+</div>
+<script>
+    function initMstHyvaGdprCookieFooterButton() {
+        'use strict';
+        return {
+            openCookieBar: function () {
+                window.dispatchEvent(new CustomEvent('mst-gdpr-cookie-open-bar-request'));
+            }
+        };
+    }
+</script>
