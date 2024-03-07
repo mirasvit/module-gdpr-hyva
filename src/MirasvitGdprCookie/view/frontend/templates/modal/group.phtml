@@ -20,7 +20,7 @@ $checked  = !$group->isRequired() && !$block->getOptionalGroupsChecked() ? '' : 
 ?>
 <div class="cookie-group-container cookie-group-container-<?= $escaper->escapeHtml($groupId); ?> border border-gray-300 mt-4 p-3 rounded-2xl shadow-sm"
      x-data="{open<?= $escaper->escapeHtml($groupId); ?>: false}">
-    <div class="flex flex justify-between">
+    <div class="flex flex justify-between items-center">
         <h4 class="title text-lg cursor-pointer"
             x-on:click="open<?= $escaper->escapeHtml($groupId); ?> = !open<?= $escaper->escapeHtml($groupId); ?>">
             <span x-show="! open<?= $escaper->escapeHtml($groupId); ?>"><?= $heroicons->chevronUpHtml('h-6 inline mr-2 w-6', 4, 4); ?></span>
@@ -28,7 +28,7 @@ $checked  = !$group->isRequired() && !$block->getOptionalGroupsChecked() ? '' : 
             <?= $escaper->escapeHtml(__($group->getName())); ?>
         </h4>
 
-        <input class="checkbox disabled:opacity-40" type="checkbox" value="1" <?= $escaper->escapeHtml($disabled); ?> checked data-group-id="<?= $escaper->escapeHtml($groupId); ?>" name="allowed-group-<?= $escaper->escapeHtml($groupId); ?>">
+        <input class="checkbox disabled:opacity-40 mr-1 rounded" type="checkbox" value="1" <?= $escaper->escapeHtml($disabled); ?> checked data-group-id="<?= $escaper->escapeHtml($groupId); ?>" name="allowed-group-<?= $escaper->escapeHtml($groupId); ?>">
     </div>
 
     <div class="content mt-4 pl-5" x-show.transition.origin.top="open<?= $escaper->escapeHtml($groupId); ?>" style="display: none">
