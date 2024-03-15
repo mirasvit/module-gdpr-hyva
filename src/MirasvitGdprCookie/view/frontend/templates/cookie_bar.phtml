@@ -147,7 +147,7 @@ $isShowDeclineButton = $block->isShowDeclineButton();
 
 
             initSavedCookieConsent: function () {
-                let allowedCookieGroups = hyva.getCookie(barConfig.groupCookieName).split(',');
+                let allowedCookieGroups = unescape(hyva.getCookie(barConfig.groupCookieName)).split(',');
                 let checkboxList = document.querySelectorAll('.group-content .cookie-group-container .checkbox')
 
                 checkboxList.forEach(function (item) {
